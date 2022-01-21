@@ -1,3 +1,6 @@
 .places__card{
-  width: 282px;
+  font-size: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border:0;
 }

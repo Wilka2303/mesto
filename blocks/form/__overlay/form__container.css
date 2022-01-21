@@ -1,0 +1,22 @@
+.form__container {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 430px;
+  height: 330px;
+  position: fixed;
+  background-color: white;
+  z-index: 3;
+}
+
+
+
+@media screen and (max-width: 768px){
+  .form__container {
+    width: 282px;
+    height: 322px;
+}
+}

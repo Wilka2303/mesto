@@ -10,3 +10,13 @@
   text-align: left;
   color: white;
 }
+
+@media screen and (max-width: 768px) {
+  .profile__describe {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+
+  }
+
+}

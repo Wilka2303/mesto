@@ -1,0 +1,21 @@
+.form__title {
+  padding-top: 34px;
+  padding-left: 36px;
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 29px;
+  letter-spacing: 0em;
+  text-align: left;
+  width: 84%;
+
+}
+
+@media screen and (max-width:768px) {
+  .form__title {
+    padding-left: 22px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
