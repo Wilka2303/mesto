@@ -1,0 +1,16 @@
+.form__close-button {
+  position: absolute;
+  background-image: url(../../../images/Close_Icon.svg);
+  top: -40px;
+  right: -40px;
+  width: 32px;
+  height: 32px;
+  background-color: rgba(0, 0, 0, 0);
+  background-size: cover;
+  border: 0;
+  transition: opacity 1s;
+}
+
+.form__close-button:hover {
+  opacity: 0.6;
+}

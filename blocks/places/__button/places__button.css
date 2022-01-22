@@ -1,0 +1,22 @@
+.places__button {
+  display: flex;
+  background-image: url(../../../images/heart.svg);
+  background-repeat: no-repeat;
+  min-width: 22px;
+  height: 19px;
+  border: 0;
+  background-size: contain;
+  padding: 0;
+  background-color: #FFF;
+  transition: opacity 1s;
+}
+
+.places__button:hover {
+  opacity: 0.5;
+}
+
+.places__button:active {
+  background-image: url(../../../images/heart_active.png);
+    opacity: 1;
+}
+
