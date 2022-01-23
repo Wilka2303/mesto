@@ -5,4 +5,9 @@
   width: 142px;
   background-repeat: no-repeat;
   background-size: cover;
+  transition: background-image 5s;
+}
+
+.header__logo:hover {
+  background-image: url(../../../images/logo.svg);
 }
