@@ -7,5 +7,6 @@
   column-gap: 17px;
   margin: 0 auto;
   max-width: 68.75%;
+  max-width: 880px;
   justify-content: space-around;
 }

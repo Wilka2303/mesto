@@ -5,7 +5,7 @@
   padding-right: 15px;
   padding-bottom: 31px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   background-color: white;
 }
