@@ -1,12 +1,17 @@
 .form__text{
   width: 358px;
-  height: 27px;
-  padding-bottom: 13px;
+  padding-bottom: 12px;
   border: 0;
-  border-bottom: 1px solid #000;
-  opacity: 0.2;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-family: Inter,Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
   margin-bottom: 30px;
   margin-left: 36px;
+  line-height: 14px;
+  padding-top: 0px
 }
 
 .form__text:last-of-type{

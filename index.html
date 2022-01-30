@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./pages/index.css">
-    <title>Mesto</title>
+    <title>Место</title>
   </head>
   <body>
     <div class= "page">
@@ -16,64 +16,67 @@
             <img class = "profile__avatar" src="./images/image.jpg" alt="Пожилой мужчина в красной шапке и серой рубашке на фоне моря">
           <div class = "profile__account-info">
             <div class = "profile__name-button">
-              <p class = "profile__name">Жак Ив Кусто </p>
-              <button class= "profile__edit-button"></button>
+              <h1 class = "profile__name">Жак Ив Кусто </h1>
+              <button type = "button" class= "profile__edit-button" aria-label ="Редактировать"></button>
             </div>
             <p class = "profile__describe">Исследователь океана</p>
           </div>
         </div>
-        <button class = "profile__add-button"></button>
+        <button type = "button" class = "profile__add-button" aria-label ="Добавить"></button>
       </section>
       <section class = "places">
-        <div class = "places__card">
+        <article class = "places__card">
           <img class = "places__image" src="images/kirill-pershin-1088404-unsplash-1.jpg" alt = "Красивое изображение гор в тумане с церковью на главном плане">
           <div class = "places__title">
             <h2 class = "places__text">Карачаевск</h2>
-            <button class = places__button></button></div>
-        </div>
-        <div class = "places__card">
+            <button type = "button" class = places__button aria-label ="Поставить лайк"></button></div>
+        </article>
+        <article class = "places__card">
           <img class = "places__image" src="images/tula.jpg" alt="Изображение памятника мужчины с полуобноженным торсом с мечом в руке на фоне Здания в форме шлема">
           <div class = "places__title">
             <h2 class = "places__text">Тула</h2>
-            <button class = places__button></button></div>
-        </div>
-        <div class = "places__card">
+            <button type = "button" class = places__button aria-label ="Поставить лайк"></button>
+          </div>
+        </article>
+        <article class = "places__card">
           <img class = "places__image" src="images/tulskay_obl.jpg" alt = "Изображение горных пород и карьеров серого, оранжевого и других цветов, вид как Марсианский пейзаж">
           <div class = "places__title">
             <h2 class = "places__text">Тульская область, Суворовские карьеры</h2>
-            <button class = places__button></button></div>
-        </div>
-        <div class = "places__card">
+            <button type = "button" class = places__button aria-label ="Поставить лайк"></button></div>
+        </article>
+        <article class = "places__card">
           <img class = "places__image" src="images/manaraga-37.jpg" alt = "Изображение реки пород с рекой перед ними">
           <div class = "places__title">
             <h2 class = "places__text">Урал</h2>
-            <button class = places__button></button></div>
-        </div>
-        <div class = "places__card">
+            <button type = "button" class = places__button aria-label ="Поставить лайк"></button></div>
+        </article>
+        <article class = "places__card">
           <img class = "places__image" src="images/spb.jpeg" alt = "Изображение достопримечательностей Санкт-Петербурга перед которыми река с белыми льдинками">
           <div class = "places__title">
             <h2 class = "places__text">Санкт-Петербург</h2>
-            <button class = places__button></button></div>
-        </div>
-        <div class = "places__card">
+            <button type = "button"class = places__button aria-label ="Поставить лайк"></button></div>
+        </article>
+        <article class = "places__card">
           <img class = "places__image" src="images/ris.-1.-sochi.jpg" alt = "Изображение сверху Олимпийского парк и Сочи парка в ночное время с желтыми огнями">
           <div class = "places__title">
             <h2 class = "places__text">Сочи. Олимпийский парк</h2>
-            <button class = places__button></button></div>
-        </div>
+            <button type = "button" class = places__button aria-label ="Поставить лайк"></button></div>
+        </article>
       </section>
       <footer class="footer">
         <p class="footer__label">&copy; 2022 Mesto Russia</p>
       </footer>
       <section class = "form">
-        <form class = "form__container">
-          <button type="button" class = "form__close-button"></button>
-          <h2 class = "form__title">Редактировать профиль</h2>
-          <input class = "form__text" type="text" id = "name" name ="name">
-  <!--        <label for="name">Имя</label>-->
-          <input class = "form__text" type="text" id = "job" name = "job">
-          <button type ="submit" class = "form__submit-button" >Сохранить</button>
-        </form>
+        <div class="form__popup">
+          <form class = "form__edit">
+            <button type="button" class = "form__close-button"></button>
+            <h2 class = "form__title">Редактировать профиль</h2>
+            <input class = "form__text" type="text" id = "name" name ="name">
+    <!--        <label for="name">Имя</label>-->
+            <input class = "form__text" type="text" id = "job" name = "job">
+            <button type ="submit" class = "form__submit-button" >Сохранить</button>
+          </form>
+        </div>
       </section>
     </div>
     <script src="./scripts/script.js"></script>

@@ -9,6 +9,10 @@
   letter-spacing: 0em;
   text-align: left;
   color: white;
+  max-width: 294px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @media screen and (max-width: 768px) {

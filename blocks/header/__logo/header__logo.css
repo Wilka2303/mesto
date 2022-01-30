@@ -11,3 +11,12 @@
 .header__logo:hover {
   background-image: url(../../../images/logo.svg);
 }
+
+@media screen and (max-width: 768px) {
+  .header__logo{
+    height: 24.4px;
+    width: 142px;
+    background-size: contain;
+
+  }
+}

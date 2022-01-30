@@ -1,7 +1,8 @@
 .form__title {
   padding-top: 34px;
   padding-left: 36px;
-  font-family: Inter;
+  padding-bottom: 54px;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 24px;
   font-style: normal;
   font-weight: 900;
@@ -9,6 +10,7 @@
   letter-spacing: 0em;
   text-align: left;
   width: 84%;
+  margin: 0;
 
 }
 
@@ -17,5 +19,7 @@
     padding-left: 22px;
     font-size: 18px;
     line-height: 22px;
+    padding-top: 25px;
+    padding-bottom: 75px;
   }
 }

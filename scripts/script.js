@@ -2,11 +2,16 @@
 let buttonOpener = document.querySelector('.profile__edit-button');
 // Находим форму в DOM
 let formSection = document.querySelector ('.form');
-let formElement = formSection.querySelector('.form__container');
+let formElement = formSection.querySelector('.form__popup');
+let formEdit = formElement.querySelector('.form__edit');
 let buttonClose = formElement.querySelector('.form__close-button');
-let buttonSave = formElement.querySelector ('.form__submit-button');
+let nameInput = formElement.querySelector ('#name');
+let jobInput = formElement.querySelector ('#job');
 buttonOpener.addEventListener('click',function () {
+
   formSection.classList.add('form_opened');
+  nameInput.setAttribute('value',name.textContent);
+  jobInput.setAttribute('value',job.textContent);
   })
   buttonClose.addEventListener ('click', close);
   function close () {
@@ -22,6 +27,7 @@ buttonOpener.addEventListener('click',function () {
 // Выберите элементы, куда должны быть вставлены значения полей
 let name = document.querySelector('.profile__name');
 let job = document.querySelector('.profile__describe');
+
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 function formSubmitHandler (evt) {
@@ -29,7 +35,6 @@ function formSubmitHandler (evt) {
                                                 // Так мы можем определить свою логику отправки.
                                                 // О том, как это делать, расскажем позже.
     // Вставьте новые значения с помощью textContent
-    console.log(this.name);
     name.textContent = this.name.value;
     job.textContent = this.job.value;
     close();
@@ -37,4 +42,4 @@ function formSubmitHandler (evt) {
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', formSubmitHandler);
+formEdit.addEventListener('submit', formSubmitHandler);
