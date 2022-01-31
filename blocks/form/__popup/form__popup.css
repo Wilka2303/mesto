@@ -1,10 +1,5 @@
 .form__popup {
   display: flex;
-  margin: auto auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
   width: 430px;
   position: relative;
   background-color: white;
