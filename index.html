@@ -25,7 +25,7 @@
         <button type = "button" class = "profile__add-button" aria-label ="Добавить"></button>
       </section>
       <section class = "places">
-        <article class = "places__card">
+<!--        <article class = "places__card">
           <img class = "places__image" src="images/kirill-pershin-1088404-unsplash-1.jpg" alt = "Красивое изображение гор в тумане с церковью на главном плане">
           <div class = "places__title">
             <h2 class = "places__text">Карачаевск</h2>
@@ -61,15 +61,24 @@
           <div class = "places__title">
             <h2 class = "places__text">Сочи. Олимпийский парк</h2>
             <button type = "button" class = places__button aria-label ="Поставить лайк"></button></div>
-        </article>
+        </article>-->
+        <template id = gallery_cards>
+          <article class = "places__card">
+            <img class = "places__image" src="">
+            <div class = "places__title">
+              <h2 class = "places__text"></h2>
+              <button type = "button" class = places__button aria-label ="Поставить лайк"></button>
+            </div>
+          </article>
+        </template>
       </section>
       <footer class="footer">
         <p class="footer__label">&copy; 2022 Mesto Russia</p>
       </footer>
-      <section class = "form">
+      <section class = "form" id = "form_edit">
         <div class="form__popup">
           <form class = "form__edit">
-            <button type="button" class = "form__close-button"></button>
+            <button type="button" class = "form__close-button" id ></button>
             <h2 class = "form__title">Редактировать профиль</h2>
             <input class = "form__text" type="text" id = "name" name ="name">
     <!--        <label for="name">Имя</label>-->
@@ -77,6 +86,8 @@
             <button type ="submit" class = "form__submit-button" >Сохранить</button>
           </form>
         </div>
+      </section>
+      <section class = "form"  id = "form_add">
         <div class="form__popup">
           <form class = "form__edit">
             <button type="button" class = "form__close-button"></button>
