@@ -25,46 +25,11 @@
         <button type = "button" class = "profile__add-button" aria-label ="Добавить"></button>
       </section>
       <section class = "places">
-<!--        <article class = "places__card">
-          <img class = "places__image" src="images/kirill-pershin-1088404-unsplash-1.jpg" alt = "Красивое изображение гор в тумане с церковью на главном плане">
-          <div class = "places__title">
-            <h2 class = "places__text">Карачаевск</h2>
-            <button type = "button" class = places__button aria-label ="Поставить лайк"></button></div>
-        </article>
-        <article class = "places__card">
-          <img class = "places__image" src="images/tula.jpg" alt="Изображение памятника мужчины с полуобноженным торсом с мечом в руке на фоне Здания в форме шлема">
-          <div class = "places__title">
-            <h2 class = "places__text">Тула</h2>
-            <button type = "button" class = places__button aria-label ="Поставить лайк"></button>
-          </div>
-        </article>
-        <article class = "places__card">
-          <img class = "places__image" src="images/tulskay_obl.jpg" alt = "Изображение горных пород и карьеров серого, оранжевого и других цветов, вид как Марсианский пейзаж">
-          <div class = "places__title">
-            <h2 class = "places__text">Тульская область, Суворовские карьеры</h2>
-            <button type = "button" class = places__button aria-label ="Поставить лайк"></button></div>
-        </article>
-        <article class = "places__card">
-          <img class = "places__image" src="images/manaraga-37.jpg" alt = "Изображение реки пород с рекой перед ними">
-          <div class = "places__title">
-            <h2 class = "places__text">Урал</h2>
-            <button type = "button" class = places__button aria-label ="Поставить лайк"></button></div>
-        </article>
-        <article class = "places__card">
-          <img class = "places__image" src="images/spb.jpeg" alt = "Изображение достопримечательностей Санкт-Петербурга перед которыми река с белыми льдинками">
-          <div class = "places__title">
-            <h2 class = "places__text">Санкт-Петербург</h2>
-            <button type = "button" class = places__button aria-label ="Поставить лайк"></button></div>
-        </article>
-        <article class = "places__card">
-          <img class = "places__image" src="images/ris.-1.-sochi.jpg" alt = "Изображение сверху Олимпийского парк и Сочи парка в ночное время с желтыми огнями">
-          <div class = "places__title">
-            <h2 class = "places__text">Сочи. Олимпийский парк</h2>
-            <button type = "button" class = places__button aria-label ="Поставить лайк"></button></div>
-        </article>-->
+
         <template id = gallery_cards>
           <article class = "places__card">
             <img class = "places__image" src="">
+            <button type = "button" class = places__trash aria-label = "Удалить мусор"></button>
             <div class = "places__title">
               <h2 class = "places__text"></h2>
               <button type = "button" class = places__button aria-label ="Поставить лайк"></button>
@@ -83,7 +48,7 @@
             <input class = "form__text" type="text" id = "name" name ="name">
     <!--        <label for="name">Имя</label>-->
             <input class = "form__text" type="text" id = "job" name = "job">
-            <button type ="submit" class = "form__submit-button" >Сохранить</button>
+            <button type ="submit" class = "form__submit-button" id = "trash">Сохранить</button>
           </form>
         </div>
       </section>
