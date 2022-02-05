@@ -1,0 +1,13 @@
+.places__trash {
+  display: flex;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  z-index: 3;
+  background-image: url(../../../images/Trash.png);
+  background-size: cover;
+  min-width:18px;
+  min-height: 19px;
+  border: 0;
+  background-color: rgba(0,0,0,0);
+}
