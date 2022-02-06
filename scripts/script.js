@@ -92,8 +92,11 @@ function gallery() {
     placesElement.appendChild(copy);
     const trashButton = copy.querySelector('.places__trash');
     trashButton.addEventListener('click', function(){
-      initialCards.splice(i, 1);
+      initialCards.splice(data, 1);
+      console.log(placesElement)
       placesElement.removeChild(copy);
+      console.log(initialCards)
+
     });
     const like = copy.querySelector('.places__button');
     like.addEventListener('click', function() {
@@ -131,6 +134,7 @@ function Construct(names, links) {
 function formAddHandler(evt){
   evt.preventDefault();
   initialCards.unshift ({name: name_card.value, link: link.value});
+  console.log(initialCards);
   gallery();
   closePopup(addForm);
 }
