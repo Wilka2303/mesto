@@ -94,7 +94,6 @@ function gallery() {
     trashButton.addEventListener('click', function(){
       initialCards.splice(data, 1);
       placesElement.removeChild(copy);
-
     });
     const like = copy.querySelector('.places__button');
     like.addEventListener('click', function() {
