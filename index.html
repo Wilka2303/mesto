@@ -25,7 +25,6 @@
         <button type = "button" class = "profile__add-button" aria-label ="Добавить"></button>
       </section>
       <section class = "places">
-
         <template id = gallery_cards>
           <article class = "places__card">
             <img class = "places__image" src="">
@@ -45,9 +44,9 @@
           <form class = "form__edit">
             <button type="button" class = "form__close-button" id ></button>
             <h2 class = "form__title">Редактировать профиль</h2>
-            <input class = "form__text" type="text" id = "name" name ="name">
+            <input class = "form__text" type="text" id = "name" name ="name" placeholder="Имя">
     <!--        <label for="name">Имя</label>-->
-            <input class = "form__text" type="text" id = "job" name = "job">
+            <input class = "form__text" type="text" id = "job" name = "job" placeholder="Занятие">
             <button type ="submit" class = "form__submit-button" id = "trash">Сохранить</button>
           </form>
         </div>
@@ -57,12 +56,21 @@
           <form class = "form__edit">
             <button type="button" class = "form__close-button"></button>
             <h2 class = "form__title">Новое место</h2>
-            <input class = "form__text" type="text" id = "name_card" name ="name_card">
-    <!--        <label for="name">Имя</label>-->
-            <input class = "form__text" type="text" id = "link" name = "link">
+            <input class = "form__text" type="text" id = "name_card" name ="name_card" placeholder="Название">
+    <!--     <label for="name">Имя</label>-->
+            <input class = "form__text" type="text" id = "link" name = "link" placeholder="Ссылка на изображение">
             <button type ="submit" class = "form__submit-button" >Создать</button>
           </form>
         </div>
+      </section>
+      <section class = "form" id ="form_image">
+          <div class = "form__images">
+            <button type="button" class = "form__close-button"></button>
+            <figure class = form__figure>
+            <img class = "form__image" src="">
+            <figcaption class = "form__image-title"></figcaption>
+          </figure>
+          </div>
       </section>
     </div>
     <script src="./scripts/script.js"></script>

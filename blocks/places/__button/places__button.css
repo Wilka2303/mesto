@@ -16,8 +16,4 @@
   opacity: 0.5;
 }
 
-.places__button:active {
-  background-image: url(../../../images/heart_active.png);
-    opacity: 1;
-}
 

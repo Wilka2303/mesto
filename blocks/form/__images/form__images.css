@@ -1,0 +1,15 @@
+.form__images {
+  display: flex;
+  max-height: 82.5vh;
+  max-width: 80vw;
+  position: relative;
+  box-sizing: content-box;
+  object-fit: cover;
+}
+
+@media (max-width:768px){
+  .form__images{
+    max-width: 75vw;
+    margin: 0 auto;
+  }
+}

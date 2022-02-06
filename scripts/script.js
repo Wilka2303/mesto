@@ -1,20 +1,22 @@
 
-let buttonEditOpener = document.querySelector('.profile__edit-button');
-let buttonAddOpener = document.querySelector('.profile__add-button'); // Кнопка редактирования
-let formSection = document.querySelector('.form'); //Форма
-let formElement = formSection.querySelector('.form__popup'); // Сам попап
-let formEdit = formElement.querySelector('.form__edit');
+const buttonEditOpener = document.querySelector('.profile__edit-button');
+const buttonAddOpener = document.querySelector('.profile__add-button'); // Кнопка редактирования
+const formSection = document.querySelector('.form'); //Форма
+const formElement = formSection.querySelector('.form__popup'); // Сам попап
+const formEdit = formElement.querySelector('.form__edit');
 let nameInput = formElement.querySelector('#name'); //Имя профиля в форме
 let jobInput = formElement.querySelector('#job'); //Описание профиля  в форме
-let name = document.querySelector('.profile__name');  // Имя профиля в разметке
-let job = document.querySelector('.profile__describe'); // Описание профиля в разметке
-let editForm = document.querySelector('#form_edit');
-let addForm = document.querySelector('#form_add');
-let buttonCloseEdit = editForm.querySelector('.form__close-button');
-let buttonCloseAdd = addForm.querySelector('.form__close-button');
+const name = document.querySelector('.profile__name');  // Имя профиля в разметке
+const job = document.querySelector('.profile__describe'); // Описание профиля в разметке
+const editForm = document.querySelector('#form_edit');
+const addForm = document.querySelector('#form_add');
+const imageBig = document.querySelector ('#form_image');
+const buttonCloseEdit = editForm.querySelector('.form__close-button');
+const buttonCloseAdd = addForm.querySelector('.form__close-button');
+const buttonCloseImage = imageBig.querySelector('.form__close-button');
 let templ = document.querySelector('#gallery_cards').content;
-const placesElement = document.querySelector('.places');
-const trash = document.querySelector('#trash');
+let placesElement = document.querySelector('.places');
+
 let inputCard = this.name_card.value;
 let inputLink = this.link.value;
 
@@ -45,56 +47,70 @@ const initialCards = [
   }
 ];
 
-function popupopenner(name_popup) {
+function openPopup(name_popup) {
   name_popup.classList.add('form_opened');
 }
 
 
-function closer_popup(name_popup) {
+function closePopup(name_popup) {
   name_popup.classList.remove('form_opened');
 }
 
 buttonEditOpener.addEventListener('click', function () {
-  popupopenner(editForm);
+  openPopup(editForm);
   nameInput.setAttribute('value', name.textContent);
   jobInput.setAttribute('value', job.textContent);
 })
 buttonCloseEdit.addEventListener('click', function () {
-  closer_popup(editForm);
+  closePopup(editForm);
 });
 
 buttonAddOpener.addEventListener('click', function () {
-  popupopenner(addForm);
+  openPopup(addForm);
 })
 buttonCloseAdd.addEventListener('click', function () {
-  closer_popup(addForm);
+  closePopup(addForm);
 });
+
+buttonCloseImage.addEventListener('click', function(){
+  closePopup(imageBig)
+});
+
+
+
 
 function gallery() {
   placesElement.innerHTML = '';
   for (let i = 0; i < initialCards.length; i++) {
-    //  let a = document.querySelector ('.new_one');
- //   document.getElementsByClassName("places_card").id = i;
     let data = initialCards[i]; //Объявляем массив
     const copy = templ.querySelector('.places__card').cloneNode(true); //Клонируем содержимое
     let image_places = copy.querySelector('.places__image'); //Выбираем элемент
     let text_places = copy.querySelector('.places__text'); // Выбираем элемент
     text_places.textContent = data.name; // Получем элемент из Массива c названием карточки
-    image_places.src = data.link; // Получаем элемент с названием каточки
+    image_places.src = data.link;
+    image_places.alt = data.name;// Получаем элемент с названием каточки
     placesElement.appendChild(copy);
-
+    const trashButton = copy.querySelector('.places__trash');
+    trashButton.addEventListener('click', function(){
+      initialCards.splice(i, 1);
+      placesElement.removeChild(copy);
+    });
+    const like = copy.querySelector('.places__button');
+    like.addEventListener('click', function() {
+      like.classList.toggle('places__button_active');
+    })
+      image_places.addEventListener('click', function(){
+      let image = document.querySelector('.form__image')
+      image.src = data.link;
+      let imageTitle = document.querySelector('.form__image-title')
+      imageTitle.textContent = data.name;
+      openPopup(imageBig);
+      }
+    );
   }
 }
 
-/*for (let button of document.querySelectorAll("places__button")) {
-  button.addEventListener("click", function () {
-    this.classList.toggle("places__button:active");
-  this.parentNode.classList.toggle('places__button')});
-}
-gallery();*/
-function deleteButtons (evt){
-  
-}
+gallery();
 
 function inputes (inp1, inp2){
   inp1.textContent = inp2.value;
@@ -104,7 +120,7 @@ function formSubmitHandler(evt) {
   evt.preventDefault();
   inputes(name,this.name);
   inputes(job,this.job);
-  closer_popup(editForm);
+  closePopup(editForm);
 }
 
 function Construct(names, links) {
@@ -114,11 +130,11 @@ function Construct(names, links) {
 
 function formAddHandler(evt){
   evt.preventDefault();
- // console.log({name: this.name_card.value , link: this.link.value});
   initialCards.unshift ({name: name_card.value, link: link.value});
-//  console.log ({name: name_card.value, link: link.src})
   gallery();
+  closePopup(addForm);
 }
+
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»

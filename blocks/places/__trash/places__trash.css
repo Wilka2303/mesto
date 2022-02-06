@@ -10,4 +10,9 @@
   min-height: 19px;
   border: 0;
   background-color: rgba(0,0,0,0);
+  cursor: pointer;
+}
+
+.places__trash:hover{
+  opacity: 0.6;
 }
