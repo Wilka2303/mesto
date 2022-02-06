@@ -93,9 +93,7 @@ function gallery() {
     const trashButton = copy.querySelector('.places__trash');
     trashButton.addEventListener('click', function(){
       initialCards.splice(data, 1);
-      console.log(placesElement)
       placesElement.removeChild(copy);
-      console.log(initialCards)
 
     });
     const like = copy.querySelector('.places__button');
