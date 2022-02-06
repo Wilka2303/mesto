@@ -131,7 +131,6 @@ function Construct(names, links) {
 function formAddHandler(evt){
   evt.preventDefault();
   initialCards.unshift ({name: name_card.value, link: link.value});
-  console.log(initialCards);
   gallery();
   closePopup(addForm);
 }
