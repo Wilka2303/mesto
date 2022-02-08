@@ -1,4 +1,4 @@
-.form__images {
+.popup__images {
   display: flex;
   max-height: 82.5vh;
   max-width: 80vw;
@@ -8,7 +8,7 @@
 }
 
 @media (max-width:768px){
-  .form__images{
+  .popup__images{
     max-width: 75vw;
     margin: 0 auto;
   }

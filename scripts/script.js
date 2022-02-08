@@ -1,19 +1,19 @@
 
 const buttonEditOpener = document.querySelector('.profile__edit-button');
 const buttonAddOpener = document.querySelector('.profile__add-button'); // Кнопка редактирования
-const formSection = document.querySelector('.form'); //Форма
-const formElement = formSection.querySelector('.form__popup'); // Сам попап
-const formEdit = formElement.querySelector('.form__edit');
-let nameInput = formElement.querySelector('#name'); //Имя профиля в форме
-let jobInput = formElement.querySelector('#job'); //Описание профиля  в форме
+const popupSection = document.querySelector('.popup'); //Форма
+const popupElement = popupSection.querySelector('.popup__content'); // Сам попап
+const popupEdit = popupElement.querySelector('.popup__form');
+let nameInput = popupElement.querySelector('#name'); //Имя профиля в форме
+let jobInput = popupElement.querySelector('#job'); //Описание профиля  в форме
 const name = document.querySelector('.profile__name');  // Имя профиля в разметке
 const job = document.querySelector('.profile__describe'); // Описание профиля в разметке
-const editForm = document.querySelector('#form_edit');
-const addForm = document.querySelector('#form_add');
-const imageBig = document.querySelector ('#form_image');
-const buttonCloseEdit = editForm.querySelector('.form__close-button');
-const buttonCloseAdd = addForm.querySelector('.form__close-button');
-const buttonCloseImage = imageBig.querySelector('.form__close-button');
+const editForm = document.querySelector('#popup_edit');
+const addForm = document.querySelector('#popup_add');
+const imageBig = document.querySelector ('#popup_image');
+const buttonCloseEdit = editForm.querySelector('.popup__close-button');
+const buttonCloseAdd = addForm.querySelector('.popup__close-button');
+const buttonCloseImage = imageBig.querySelector('.popup__close-button');
 let templ = document.querySelector('#gallery_cards').content;
 let placesElement = document.querySelector('.places');
 
@@ -48,12 +48,12 @@ const initialCards = [
 ];
 
 function openPopup(name_popup) {
-  name_popup.classList.add('form_opened');
+  name_popup.classList.add('popup_opened');
 }
 
 
 function closePopup(name_popup) {
-  name_popup.classList.remove('form_opened');
+  name_popup.classList.remove('popup_opened');
 }
 
 buttonEditOpener.addEventListener('click', function () {
@@ -100,9 +100,9 @@ function gallery() {
       like.classList.toggle('places__button_active');
     })
       image_places.addEventListener('click', function(){
-      let image = document.querySelector('.form__image')
+      let image = document.querySelector('.popup__image')
       image.src = data.link;
-      let imageTitle = document.querySelector('.form__image-title')
+      let imageTitle = document.querySelector('.popup__image-title')
       imageTitle.textContent = data.name;
       openPopup(imageBig);
       }
@@ -138,5 +138,5 @@ function formAddHandler(evt){
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formEdit.addEventListener('submit', formSubmitHandler);
+popupEdit.addEventListener('submit', formSubmitHandler);
 addForm.addEventListener('submit', formAddHandler);
