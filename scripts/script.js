@@ -3,22 +3,19 @@ const buttonEditOpener = document.querySelector('.profile__edit-button');
 const buttonAddOpener = document.querySelector('.profile__add-button'); // Кнопка редактирования
 const popupSection = document.querySelector('.popup'); //Форма
 const popupElement = popupSection.querySelector('.popup__content'); // Сам попап
-const popupEdit = popupElement.querySelector('.popup__form');
-let nameInput = popupElement.querySelector('#name'); //Имя профиля в форме
-let jobInput = popupElement.querySelector('#job'); //Описание профиля  в форме
-const name = document.querySelector('.profile__name');  // Имя профиля в разметке
-const job = document.querySelector('.profile__describe'); // Описание профиля в разметке
-const editForm = document.querySelector('#popup_edit');
-const addForm = document.querySelector('#popup_add');
+const nameInput = popupElement.querySelector('#name'); //Имя профиля в форме
+const jobInput = popupElement.querySelector('#job'); //Описание профиля  в форме
+const nameProfile = document.querySelector('.profile__name');
+const jobProfile = document.querySelector('.profile__describe'); // Описание профиля в разметке
+const editForm = document.querySelector('.popup__type_edit');
+const addForm = document.querySelector('.popup__type_add');
 const imageBig = document.querySelector ('#popup_image');
 const buttonCloseEdit = editForm.querySelector('.popup__close-button');
 const buttonCloseAdd = addForm.querySelector('.popup__close-button');
 const buttonCloseImage = imageBig.querySelector('.popup__close-button');
-let templ = document.querySelector('#gallery_cards').content;
-let placesElement = document.querySelector('.places');
-
-let inputCard = this.name_card.value;
-let inputLink = this.link.value;
+const template = document.querySelector('#gallery_cards').content;
+const placesElement = document.querySelector('.places');
+const trashButton = document.querySelector('.places__trash');
 
 const initialCards = [
   {
@@ -47,19 +44,19 @@ const initialCards = [
   }
 ];
 
-function openPopup(name_popup) {
-  name_popup.classList.add('popup_opened');
+function openPopup(namePopup) {
+  namePopup.classList.add('popup_opened');
 }
 
 
-function closePopup(name_popup) {
-  name_popup.classList.remove('popup_opened');
+function closePopup(namePopup) {
+  namePopup.classList.remove('popup_opened');
 }
 
 buttonEditOpener.addEventListener('click', function () {
   openPopup(editForm);
-  nameInput.setAttribute('value', name.textContent);
-  jobInput.setAttribute('value', job.textContent);
+  nameInput.value = nameProfile.textContent;
+  jobInput.value = jobProfile.textContent;
 })
 buttonCloseEdit.addEventListener('click', function () {
   closePopup(editForm);
@@ -76,50 +73,58 @@ buttonCloseImage.addEventListener('click', function(){
   closePopup(imageBig)
 });
 
-
-
-
-function gallery() {
-  placesElement.innerHTML = '';
-  for (let i = 0; i < initialCards.length; i++) {
-    let data = initialCards[i]; //Объявляем массив
-    const copy = templ.querySelector('.places__card').cloneNode(true); //Клонируем содержимое
-    let image_places = copy.querySelector('.places__image'); //Выбираем элемент
-    let text_places = copy.querySelector('.places__text'); // Выбираем элемент
-    text_places.textContent = data.name; // Получем элемент из Массива c названием карточки
-    image_places.src = data.link;
-    image_places.alt = data.name;// Получаем элемент с названием каточки
-    placesElement.appendChild(copy);
-    const trashButton = copy.querySelector('.places__trash');
-    trashButton.addEventListener('click', function(){
-      initialCards.splice(data, 1);
-      placesElement.removeChild(copy);
-    });
-    const like = copy.querySelector('.places__button');
-    like.addEventListener('click', function() {
-      like.classList.toggle('places__button_active');
-    })
-      image_places.addEventListener('click', function(){
-      let image = document.querySelector('.popup__image')
-      image.src = data.link;
-      let imageTitle = document.querySelector('.popup__image-title')
-      imageTitle.textContent = data.name;
-      openPopup(imageBig);
-      }
-    );
-  }
+function eventListener(el){
+  el.querySelector('.places__trash').addEventListener('click',cardDeleteHandler);
+  el.querySelector('.places__button').addEventListener('click',cardLikeHandler);
 }
-
-gallery();
-
-function inputes (inp1, inp2){
-  inp1.textContent = inp2.value;
-}
-
-function formSubmitHandler(evt) {
+function cardAddHandler(evt){
   evt.preventDefault();
-  inputes(name,this.name);
-  inputes(job,this.job);
+  const obj = {
+    name: name_card.value, link: link.value
+  }
+  const sm= document.querySelector('.places__card:first-child')
+  console.log(sm);
+  const element = createCard(obj);
+  sm.prepend(element);
+  closePopup(addForm);
+}
+
+function createCard(objectCards){
+  //Клонируем содержимое
+  const copy = template.querySelector('.places__card').cloneNode(true);
+  const image_places = copy.querySelector('.places__image'); //Выбираем элемент
+  const text_places = copy.querySelector('.places__text');
+  text_places.textContent = objectCards.name; // Получем элемент из Массива c названием карточки
+  const cardLink = objectCards.link;
+  const cardName = objectCards.name;
+  image_places.src = cardLink;
+  image_places.alt = cardName;
+
+  image_places.addEventListener('click', function(){
+          const image = document.querySelector('.popup__image')
+          image.src = cardLink;
+          const imageTitle = document.querySelector('.popup__image-title')
+          imageTitle.textContent = cardName;
+          openPopup(imageBig);
+          }
+  )
+
+  eventListener(copy);
+  placesElement.appendChild(copy);
+  return copy;
+}
+
+
+function renderInitialCards() {
+    initialCards.forEach(createCard);
+
+}
+renderInitialCards();
+
+function cardSubmitHandler(evt) {
+  evt.preventDefault();
+  nameProfile.textContent = nameInput.value;
+  jobProfile.textContent = jobInput.value;
   closePopup(editForm);
 }
 
@@ -128,15 +133,20 @@ function Construct(names, links) {
   this.link = links;
 }
 
-function formAddHandler(evt){
-  evt.preventDefault();
-  initialCards.unshift ({name: name_card.value, link: link.value});
-  gallery();
-  closePopup(addForm);
+
+
+function cardDeleteHandler (evt){
+  evt.target.closest('.places__card').remove();
 }
 
+function cardLikeHandler (evt){
 
+  evt.target.classList.toggle('places__button_active');
+
+}
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-popupEdit.addEventListener('submit', formSubmitHandler);
-addForm.addEventListener('submit', formAddHandler);
+
+editForm.addEventListener('submit', cardSubmitHandler);
+addForm.addEventListener('submit', cardAddHandler);
+
