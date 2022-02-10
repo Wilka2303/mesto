@@ -7,8 +7,8 @@ const nameInput = popupElement.querySelector('#name'); //Имя профиля �
 const jobInput = popupElement.querySelector('#job'); //Описание профиля  в форме
 const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__describe'); // Описание профиля в разметке
-const editForm = document.querySelector('.popup__type_edit');
-const addForm = document.querySelector('.popup__type_add');
+const editForm = document.querySelector('.popup_type_edit');
+const addForm = document.querySelector('.popup_type_add');
 const imageBig = document.querySelector ('#popup_image');
 const buttonCloseEdit = editForm.querySelector('.popup__close-button');
 const buttonCloseAdd = addForm.querySelector('.popup__close-button');
@@ -74,18 +74,17 @@ buttonCloseImage.addEventListener('click', function(){
 });
 
 function eventListener(el){
-  el.querySelector('.places__trash').addEventListener('click',cardDeleteHandler);
-  el.querySelector('.places__button').addEventListener('click',cardLikeHandler);
+  el.querySelector('.places__trash').addEventListener('click',HandlecardDelete);
+  el.querySelector('.places__button').addEventListener('click',HandlecardLike);
 }
-function cardAddHandler(evt){
+function HandlecardAdd(evt){
   evt.preventDefault();
   const obj = {
     name: name_card.value, link: link.value
   }
-  const sm= document.querySelector('.places__card:first-child')
-  console.log(sm);
+  const card= placesElement;
   const element = createCard(obj);
-  sm.prepend(element);
+  card.prepend(element);
   closePopup(addForm);
 }
 
@@ -121,7 +120,7 @@ function renderInitialCards() {
 }
 renderInitialCards();
 
-function cardSubmitHandler(evt) {
+function HandlecardSubmit(evt) {
   evt.preventDefault();
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
@@ -135,11 +134,11 @@ function Construct(names, links) {
 
 
 
-function cardDeleteHandler (evt){
+function HandlecardDelete (evt){
   evt.target.closest('.places__card').remove();
 }
 
-function cardLikeHandler (evt){
+function HandlecardLike (evt){
 
   evt.target.classList.toggle('places__button_active');
 
@@ -147,6 +146,6 @@ function cardLikeHandler (evt){
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 
-editForm.addEventListener('submit', cardSubmitHandler);
-addForm.addEventListener('submit', cardAddHandler);
+editForm.addEventListener('submit', HandlecardSubmit);
+addForm.addEventListener('submit', HandlecardAdd);
 
