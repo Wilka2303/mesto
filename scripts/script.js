@@ -1,17 +1,16 @@
 
 const buttonEditOpener = document.querySelector('.profile__edit-button');
-const buttonAddOpener = document.querySelector('.profile__add-button'); // Кнопка редактирования
-const popupSection = document.querySelector('.popup'); //Форма
-const popupElement = popupSection.querySelector('.popup__content'); // Сам попап
-const nameInput = popupElement.querySelector('#name'); //Имя профиля в форме
-const jobInput = popupElement.querySelector('#job'); //Описание профиля  в форме
+const buttonAddOpener = document.querySelector('.profile__add-button');
+const popupEditProfile = document.querySelector('.popup_type_edit');
+const popupAddCard = document.querySelector('.popup_type_add'); // Кнопка добавления
+//const popupSection = document.querySelector('.popup_type_edit'); //Форма
+const nameInput = popupEditProfile.querySelector('#name'); //Имя профиля в форме
+const jobInput = popupEditProfile.querySelector('#job'); //Описание профиля  в форме
 const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__describe'); // Описание профиля в разметке
-const editForm = document.querySelector('.popup_type_edit');
-const addForm = document.querySelector('.popup_type_add');
 const imageBig = document.querySelector ('#popup_image');
-const buttonCloseEdit = editForm.querySelector('.popup__close-button');
-const buttonCloseAdd = addForm.querySelector('.popup__close-button');
+const buttonCloseEdit = popupEditProfile.querySelector('.popup__close-button');
+const buttonCloseAdd = popupAddCard.querySelector('.popup__close-button');
 const buttonCloseImage = imageBig.querySelector('.popup__close-button');
 const template = document.querySelector('#gallery_cards').content;
 const placesElement = document.querySelector('.places');
@@ -28,19 +27,19 @@ function closePopup(namePopup) {
 }
 
 buttonEditOpener.addEventListener('click', function () {
-  openPopup(editForm);
+  openPopup(popupEditProfile);
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
 })
 buttonCloseEdit.addEventListener('click', function () {
-  closePopup(editForm);
+  closePopup(popupEditProfile);
 });
 
 buttonAddOpener.addEventListener('click', function () {
-  openPopup(addForm);
+  openPopup(popupAddCard);
 })
 buttonCloseAdd.addEventListener('click', function () {
-  closePopup(addForm);
+  closePopup(popupAddCard);
 });
 
 buttonCloseImage.addEventListener('click', function(){
@@ -48,57 +47,60 @@ buttonCloseImage.addEventListener('click', function(){
 });
 
 function eventListener(el){
-  el.querySelector('.places__trash').addEventListener('click',HandlecardDelete);
-  el.querySelector('.places__button').addEventListener('click',HandlecardLike);
+  el.querySelector('.places__trash').addEventListener('click',handleCardDelete);
+  el.querySelector('.places__button').addEventListener('click',handleCardLike);
+  el.querySelector('.places__image').addEventListener('click', handleCardBigImage)
 }
-function HandlecardAdd(evt){
+function handleCardFormSubmit (evt){
   evt.preventDefault();
-  const obj = {
-    name: name_card.value, link: link.value
+  const cardNameInputValue = popupAddCard.querySelector('.popup__text_type_card-name');
+  const cardLinkInputValue = popupAddCard.querySelector('.popup__text_type_card-link');
+  const inputvalues = {
+    name: cardNameInputValue.value, link: cardLinkInputValue.value
   }
-  const card= placesElement;
-  const element = createCard(obj);
-  card.prepend(element);
-  closePopup(addForm);
+  const element = createCard(inputvalues);
+  placesElement.prepend(element);
+  closePopup(popupAddCard);
 }
 
-function createCard(objectCards){
-  //Клонируем содержимое
+function createCard(objectCard){
   const copy = template.querySelector('.places__card').cloneNode(true);
-  const image_places = copy.querySelector('.places__image'); //Выбираем элемент
-  const text_places = copy.querySelector('.places__text');
-  text_places.textContent = objectCards.name; // Получем элемент из Массива c названием карточки
-  const cardLink = objectCards.link;
-  const cardName = objectCards.name;
-  image_places.src = cardLink;
-  image_places.alt = cardName;
-
-  image_places.addEventListener('click', function(){
-          const image = document.querySelector('.popup__image')
-          image.src = cardLink;
-          const imageTitle = document.querySelector('.popup__image-title')
-          imageTitle.textContent = cardName;
-          openPopup(imageBig);
-          }
-  )
-
+  //Клонируем содержимое
+  const imagePlaces = copy.querySelector('.places__image'); //Выбираем элемент
+  const textPlaces = copy.querySelector('.places__text');
+  textPlaces.textContent = objectCard.name; // Получем элемент из Массива c названием карточки
+  const cardLink = objectCard.link;
+  const cardName = objectCard.name;
+  imagePlaces.src = cardLink;
+  imagePlaces.alt = cardName;
   eventListener(copy);
-  placesElement.appendChild(copy);
+//  placesElement.appendChild(copy);
   return copy;
+}
+
+function handleCardBigImage () {
+  const image = document.querySelector('.popup__image')
+    image.src = cardLink;
+    const imageTitle = document.querySelector('.popup__image-title')
+    imageTitle.textContent = cardName;
+    image.alt = cardName
+    openPopup(imageBig);
 }
 
 
 function renderInitialCards() {
-    initialCards.forEach(createCard);
-
+    initialCards.forEach(initCard => {
+      let newcard = createCard (initCard)
+      placesElement.appendChild(newcard);
+    });
 }
 renderInitialCards();
 
-function HandlecardSubmit(evt) {
+function handleCardSubmit(evt) {
   evt.preventDefault();
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
-  closePopup(editForm);
+  closePopup(popupEditProfile);
 }
 
 function Construct(names, links) {
@@ -108,11 +110,11 @@ function Construct(names, links) {
 
 
 
-function HandlecardDelete (evt){
+function handleCardDelete (evt){
   evt.target.closest('.places__card').remove();
 }
 
-function HandlecardLike (evt){
+function handleCardLike (evt){
 
   evt.target.classList.toggle('places__button_active');
 
@@ -120,6 +122,6 @@ function HandlecardLike (evt){
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 
-editForm.addEventListener('submit', HandlecardSubmit);
-addForm.addEventListener('submit', HandlecardAdd);
+popupEditProfile.addEventListener('submit', handleCardSubmit);
+popupAddCard.addEventListener('submit', handleCardFormSubmit );
 
