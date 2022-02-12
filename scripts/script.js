@@ -21,7 +21,6 @@ function openPopup(namePopup) {
   namePopup.classList.add('popup_opened');
 }
 
-
 function closePopup(namePopup) {
   namePopup.classList.remove('popup_opened');
 }
@@ -31,6 +30,7 @@ buttonEditOpener.addEventListener('click', function () {
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
 })
+
 buttonCloseEdit.addEventListener('click', function () {
   closePopup(popupEditProfile);
 });
@@ -46,11 +46,12 @@ buttonCloseImage.addEventListener('click', function(){
   closePopup(imageBig)
 });
 
-function eventListener(el){
-  el.querySelector('.places__trash').addEventListener('click',handleCardDelete);
-  el.querySelector('.places__button').addEventListener('click',handleCardLike);
-  el.querySelector('.places__image').addEventListener('click', handleCardBigImage)
+function addEventListeners(el){
+  el.querySelector('.places__trash').addEventListener('click', handleCardDelete);
+  el.querySelector('.places__button').addEventListener('click', handleCardLike);
+  el.querySelector('.places__image').addEventListener('click', handleopenBigImage)
 }
+
 function handleCardFormSubmit (evt){
   evt.preventDefault();
   const cardNameInputValue = popupAddCard.querySelector('.popup__text_type_card-name');
@@ -58,8 +59,8 @@ function handleCardFormSubmit (evt){
   const inputvalues = {
     name: cardNameInputValue.value, link: cardLinkInputValue.value
   }
-  const element = createCard(inputvalues);
-  placesElement.prepend(element);
+  //const element = ;
+  placesElement.prepend(createCard(inputvalues));
   closePopup(popupAddCard);
 }
 
@@ -73,20 +74,21 @@ function createCard(objectCard){
   const cardName = objectCard.name;
   imagePlaces.src = cardLink;
   imagePlaces.alt = cardName;
-  eventListener(copy);
+  addEventListeners(copy);
 //  placesElement.appendChild(copy);
   return copy;
 }
 
-function handleCardBigImage () {
+function handleopenBigImage () {
+  const cardLink = this.closest('.places__image').getAttribute('src');
+  const cardName = this.closest('.places__image').getAttribute('alt');
   const image = document.querySelector('.popup__image')
-    image.src = cardLink;
-    const imageTitle = document.querySelector('.popup__image-title')
-    imageTitle.textContent = cardName;
-    image.alt = cardName
-    openPopup(imageBig);
+  const imageTitle = document.querySelector('.popup__image-title')
+  image.src = cardLink;
+  imageTitle.textContent = cardName;
+  image.alt = cardName;
+  openPopup(imageBig);
 }
-
 
 function renderInitialCards() {
     initialCards.forEach(initCard => {
@@ -103,24 +105,13 @@ function handleCardSubmit(evt) {
   closePopup(popupEditProfile);
 }
 
-function Construct(names, links) {
-  this.name = names;
-  this.link = links;
-}
-
-
-
 function handleCardDelete (evt){
   evt.target.closest('.places__card').remove();
 }
 
 function handleCardLike (evt){
-
   evt.target.classList.toggle('places__button_active');
-
 }
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
 
 popupEditProfile.addEventListener('submit', handleCardSubmit);
 popupAddCard.addEventListener('submit', handleCardFormSubmit );
