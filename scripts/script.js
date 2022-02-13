@@ -3,7 +3,6 @@ const buttonEditOpener = document.querySelector('.profile__edit-button');
 const buttonAddOpener = document.querySelector('.profile__add-button');
 const popupEditProfile = document.querySelector('.popup_type_edit');
 const popupAddCard = document.querySelector('.popup_type_add'); // Кнопка добавления
-//const popupSection = document.querySelector('.popup_type_edit'); //Форма
 const nameInput = popupEditProfile.querySelector('#name'); //Имя профиля в форме
 const jobInput = popupEditProfile.querySelector('#job'); //Описание профиля  в форме
 const nameProfile = document.querySelector('.profile__name');
@@ -15,7 +14,10 @@ const buttonCloseImage = imageBig.querySelector('.popup__close-button');
 const template = document.querySelector('#gallery_cards').content;
 const placesElement = document.querySelector('.places');
 const trashButton = document.querySelector('.places__trash');
-
+const cardNameInputValue = popupAddCard.querySelector('.popup__text_type_card-name');
+const cardLinkInputValue = popupAddCard.querySelector('.popup__text_type_card-link');
+const image = document.querySelector('.popup__image');
+const imageTitle = document.querySelector('.popup__image-title')
 
 function openPopup(namePopup) {
   namePopup.classList.add('popup_opened');
@@ -49,18 +51,19 @@ buttonCloseImage.addEventListener('click', function(){
 function addEventListeners(el){
   el.querySelector('.places__trash').addEventListener('click', handleCardDelete);
   el.querySelector('.places__button').addEventListener('click', handleCardLike);
-  el.querySelector('.places__image').addEventListener('click', handleopenBigImage)
+  // Единственное как понимаю можно было бы вызвать функцию с использованием bind для объекта функции CreateCard, если есть какие то другие варианты буду благодарен если опишите, на текущий момент вернул все как было в версии можно лучше
+  //el.querySelector('.places__image').addEventListener('click', handleopenBigImage.bind(null, objectCard));
 }
 
 function handleCardFormSubmit (evt){
   evt.preventDefault();
-  const cardNameInputValue = popupAddCard.querySelector('.popup__text_type_card-name');
-  const cardLinkInputValue = popupAddCard.querySelector('.popup__text_type_card-link');
+
   const inputvalues = {
     name: cardNameInputValue.value, link: cardLinkInputValue.value
   }
-  //const element = ;
   placesElement.prepend(createCard(inputvalues));
+  cardNameInputValue.value = '';
+  cardLinkInputValue.value = '';
   closePopup(popupAddCard);
 }
 
@@ -74,25 +77,36 @@ function createCard(objectCard){
   const cardName = objectCard.name;
   imagePlaces.src = cardLink;
   imagePlaces.alt = cardName;
+  imagePlaces.addEventListener('click', function(){
+
+    image.src = cardLink;
+    image.alt = cardName;
+    imageTitle.textContent = cardName;
+    openPopup(imageBig);
+    })
   addEventListeners(copy);
-//  placesElement.appendChild(copy);
   return copy;
 }
 
-function handleopenBigImage () {
-  const cardLink = this.closest('.places__image').getAttribute('src');
-  const cardName = this.closest('.places__image').getAttribute('alt');
-  const image = document.querySelector('.popup__image')
-  const imageTitle = document.querySelector('.popup__image-title')
-  image.src = cardLink;
-  imageTitle.textContent = cardName;
-  image.alt = cardName;
-  openPopup(imageBig);
-}
+
+// Фунция с использованием объекта из CreateCard, ваш комментарий увы остался не понят до конца :(
+// function handleopenBigImage(objectCard) {
+//   const cardLink = objectCard.link;
+//   const cardName = objectCard.name;
+
+//   const image = document.querySelector('.popup__image')
+//   const imageTitle = document.querySelector('.popup__image-title')
+
+//   image.src = cardLink;
+//   imageTitle.textContent = cardName;
+//   image.alt = cardName;
+
+//   openPopup(imageBig);
+// }
 
 function renderInitialCards() {
     initialCards.forEach(initCard => {
-      let newcard = createCard (initCard)
+      const newcard = createCard (initCard)
       placesElement.appendChild(newcard);
     });
 }
