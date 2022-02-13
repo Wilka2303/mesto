@@ -52,7 +52,7 @@ function addEventListeners(el){
   el.querySelector('.places__trash').addEventListener('click', handleCardDelete);
   el.querySelector('.places__button').addEventListener('click', handleCardLike);
   // Единственное как понимаю можно было бы вызвать функцию с использованием bind для объекта функции CreateCard, если есть какие то другие варианты буду благодарен если опишите, на текущий момент вернул все как было в версии можно лучше
-  //el.querySelector('.places__image').addEventListener('click', handleopenBigImage.bind(null, objectCard));
+  //el.querySelector('.places__image').addEventListener('click', handleOpenBigImage.bind(null, objectCard));
 }
 
 function handleCardFormSubmit (evt){
@@ -78,7 +78,6 @@ function createCard(objectCard){
   imagePlaces.src = cardLink;
   imagePlaces.alt = cardName;
   imagePlaces.addEventListener('click', function(){
-
     image.src = cardLink;
     image.alt = cardName;
     imageTitle.textContent = cardName;
@@ -90,7 +89,7 @@ function createCard(objectCard){
 
 
 // Фунция с использованием объекта из CreateCard, ваш комментарий увы остался не понят до конца вернулось к версии можно лучше:(
-// function handleopenBigImage(objectCard) {
+// function handleOpenBigImage(objectCard) {
 //   const cardLink = objectCard.link;
 //   const cardName = objectCard.name;
 
