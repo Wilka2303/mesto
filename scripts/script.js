@@ -89,7 +89,7 @@ function createCard(objectCard){
 }
 
 
-// Фунция с использованием объекта из CreateCard, ваш комментарий увы остался не понят до конца :(
+// Фунция с использованием объекта из CreateCard, ваш комментарий увы остался не понят до конца вернулось к версии можно лучше:(
 // function handleopenBigImage(objectCard) {
 //   const cardLink = objectCard.link;
 //   const cardName = objectCard.name;
