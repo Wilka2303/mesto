@@ -48,11 +48,11 @@ buttonCloseImage.addEventListener('click', function(){
   closePopup(imageBig)
 });
 
-function addEventListeners(el){
+function addEventListeners(el, objectCard){
   el.querySelector('.places__trash').addEventListener('click', handleCardDelete);
   el.querySelector('.places__button').addEventListener('click', handleCardLike);
   // Единственное как понимаю можно было бы вызвать функцию с использованием bind для объекта функции CreateCard, если есть какие то другие варианты буду благодарен если опишите, на текущий момент вернул все как было в версии можно лучше
-  //el.querySelector('.places__image').addEventListener('click', handleOpenBigImage.bind(null, objectCard));
+  el.querySelector('.places__image').addEventListener('click', () => handleOpenBigImage(objectCard));
 }
 
 function handleCardFormSubmit (evt){
@@ -88,20 +88,22 @@ function createCard(objectCard){
 }
 
 
-// Фунция с использованием объекта из CreateCard, ваш комментарий увы остался не понят до конца вернулось к версии можно лучше:(
-// function handleOpenBigImage(objectCard) {
-//   const cardLink = objectCard.link;
-//   const cardName = objectCard.name;
+// Фунция с использованием объекта из CreateCard
+function handleOpenBigImage(objectCard) {
+  if (typeof objectCard !== 'undefined'){
+  const cardLink = objectCard.link;
+  const cardName = objectCard.name;
 
-//   const image = document.querySelector('.popup__image')
-//   const imageTitle = document.querySelector('.popup__image-title')
+  const image = document.querySelector('.popup__image')
+  const imageTitle = document.querySelector('.popup__image-title')
 
-//   image.src = cardLink;
-//   imageTitle.textContent = cardName;
-//   image.alt = cardName;
+  image.src = cardLink;
+  imageTitle.textContent = cardName;
+  image.alt = cardName;
 
-//   openPopup(imageBig);
-// }
+  openPopup(imageBig);
+}
+}
 
 function renderInitialCards() {
     initialCards.forEach(initCard => {
