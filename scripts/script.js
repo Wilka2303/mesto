@@ -141,8 +141,10 @@ function handleEscapeClick(e) {
 }
 
 function handlePopuoOuterClick(e) {
-  if(e.target.classList.contains('popup')) {
-    e.target.classList.remove('popup_opened')
+  const target = e.target;
+
+  if(target.classList.contains('popup')) {
+    closePopup(target);
   }
 }
 

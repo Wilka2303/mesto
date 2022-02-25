@@ -27,41 +27,74 @@ const hideInputError = (formElement, inputElement) => {
 
 // Add to git
 
-let popupForms = document.querySelectorAll('.popup__form');
-
-popupForms.forEach((form) => {
-  let popupInputs = form.querySelectorAll('.popup__input');
-  let popupButton = form.querySelector('.popup__submit-button');
-
-  handlePopupInputs(popupInputs, popupButton);
-})
-
-function handlePopupInputs(popupInputs, popupButton) {
-  popupInputs.forEach(popupInput => handlePopupInput(popupInput, popupButton));
-}
-
-function validatePopupInput() {
-
-}
-
-function handlePopupInput(popupInput, popupButton) {
-  let input = popupInput.querySelector('.popup__text');
-  let popupError = popupInput.querySelector('.popup__error');
-
-
-  input.addEventListener('input', function() {
-    if(!this.validity.isValid) {
-      this.classList.add('popup__text_wrong');
-      setPopupTextContent(popupError, this.validationMessage);
-      popupButton.disabled = true;
-    } else {
-      this.classList.remove('popup__text_wrong');
-      setPopupTextContent(popupError, '');
-      popupButton.disabled = false;
-    }
-  })
-}
-
 function setPopupTextContent(popupSpan, message) {
   popupSpan.textContent =  message;
+}
+
+enableValidation({
+  formSelector: '.popup_type_edit .popup__form',
+  inputSelector: '.popup__text',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: '.popup__submit-button_disabled',
+  inputErrorClass: '.popup__text_wrong',
+  errorClass: '.popup__error'
+});
+
+enableValidation({
+  formSelector: '.popup_type_add .popup__form',
+  inputSelector: '.popup__text',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: '.popup__submit-button_disabled',
+  inputErrorClass: '.popup__text_wrong',
+  errorClass: '.popup__error'
+});
+
+function handleFormInput(input, errorClass) {
+  if(!input.validity.valid) {
+    input.classList.add('popup__text_wrong');
+    setPopupTextContent(errorClass, input.validationMessage);
+  } else {
+    input.classList.remove('popup__text_wrong');
+    setPopupTextContent(errorClass, '');
+  }
+}
+
+function enableValidation(options) {
+  const formSelector = document.querySelector(options.formSelector);
+
+  const [ inputSelectorFirst, inputSelectorSecond ] = formSelector.querySelectorAll(options.inputSelector);
+
+  const submitButtonSelector = formSelector.querySelector(options.submitButtonSelector);
+
+  const [ errorClassFirst, errorClassSecond ] = formSelector.querySelectorAll(options.errorClass);
+
+  formSelector.addEventListener('input', (evt) => {
+
+    handleErrorMessage(inputSelectorFirst, inputSelectorSecond, submitButtonSelector);
+
+    handleFormInputs(evt, inputSelectorFirst, inputSelectorSecond, errorClassFirst, errorClassSecond);
+  })
+
+  // inputSelectorFirst.addEventListener('input', () => handleFormInput(inputSelectorFirst, errorClassFirst));
+
+  // inputSelectorSecond.addEventListener('input', () => handleFormInput(inputSelectorSecond, errorClassSecond));
+}
+
+function handleFormInputs(evt, inputFirst, inputSecond, errorFirst, errorSecond) {
+  const target = evt.target;
+
+  if(target === inputFirst) {
+    handleFormInput(target, errorFirst)
+  }
+  if(target === inputSecond) {
+    handleFormInput(target, errorSecond)
+  }
+}
+
+function handleErrorMessage(inputFirst, inputSecond, submitButton) {
+  if(inputFirst.validity.valid && inputSecond.validity.valid) {
+    submitButton.classList.remove('popup__submit-button_disabled')
+  } else {
+    submitButton.classList.add('popup__submit-button_disabled')
+  }
 }
