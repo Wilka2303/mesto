@@ -131,3 +131,22 @@ function handleCardLike (evt){
 popupEditProfile.addEventListener('submit', handleCardSubmit);
 popupAddCard.addEventListener('submit', handleCardFormSubmit );
 
+
+// Add to git
+
+function handleEscapeClick(e) {
+  if(e.key === 'Escape') {
+    closePopup(popupEditProfile)
+  }
+}
+
+function handlePopuoOuterClick(e) {
+  if(e.target.classList.contains('popup')) {
+    e.target.classList.remove('popup_opened')
+  }
+}
+
+document.addEventListener('keydown', handleEscapeClick)
+document.addEventListener('click', handlePopuoOuterClick)
+
+

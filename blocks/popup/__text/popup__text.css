@@ -12,6 +12,9 @@
   padding-top: 0px;
 }
 
+.popup__text:focus {
+  outline: none;
+}
 
 @media screen and (max-width:768px) {
   .popup__text {
