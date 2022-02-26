@@ -31,70 +31,69 @@ function setPopupTextContent(popupSpan, message) {
   popupSpan.textContent =  message;
 }
 
-enableValidation({
-  formSelector: '.popup_type_edit .popup__form',
-  inputSelector: '.popup__text',
-  submitButtonSelector: '.popup__submit-button',
-  inactiveButtonClass: '.popup__submit-button_disabled',
-  inputErrorClass: '.popup__text_wrong',
-  errorClass: '.popup__error'
-});
-
-enableValidation({
-  formSelector: '.popup_type_add .popup__form',
-  inputSelector: '.popup__text',
-  submitButtonSelector: '.popup__submit-button',
-  inactiveButtonClass: '.popup__submit-button_disabled',
-  inputErrorClass: '.popup__text_wrong',
-  errorClass: '.popup__error'
-});
-
-function handleFormInput(input, errorClass) {
+function handleFormInput(input, errorClass, submitButtonSelector, inputErrorClass) {
   if(!input.validity.valid) {
-    input.classList.add('popup__text_wrong');
+    input.classList.add(inputErrorClass);
     setPopupTextContent(errorClass, input.validationMessage);
   } else {
-    input.classList.remove('popup__text_wrong');
+    input.classList.remove(inputErrorClass);
     setPopupTextContent(errorClass, '');
   }
 }
 
 function enableValidation(options) {
-  const formSelector = document.querySelector(options.formSelector);
+  const formList = document.querySelectorAll(options.formSelector);
 
-  const [ inputSelectorFirst, inputSelectorSecond ] = formSelector.querySelectorAll(options.inputSelector);
+  formList.forEach((formElement) => {
+    const [ inputSelectorFirst, inputSelectorSecond ] = formElement.querySelectorAll(options.inputSelector);
 
-  const submitButtonSelector = formSelector.querySelector(options.submitButtonSelector);
+    const submitButtonSelector = formElement.querySelector(options.submitButtonSelector);
 
-  const [ errorClassFirst, errorClassSecond ] = formSelector.querySelectorAll(options.errorClass);
+    const [ errorClassFirst, errorClassSecond ] = formElement.querySelectorAll(options.errorClass);
 
-  formSelector.addEventListener('input', (evt) => {
+    handleFormSubmitButton(inputSelectorFirst, inputSelectorSecond, submitButtonSelector);
 
-    handleErrorMessage(inputSelectorFirst, inputSelectorSecond, submitButtonSelector);
+    formElement.addEventListener('input', (evt) => {
 
-    handleFormInputs(evt, inputSelectorFirst, inputSelectorSecond, errorClassFirst, errorClassSecond);
+      handleFormSubmitButton(inputSelectorFirst, inputSelectorSecond, submitButtonSelector);
+
+      handleFormInputs(evt, inputSelectorFirst, inputSelectorSecond, errorClassFirst, errorClassSecond, submitButtonSelector, options.inputErrorClass);
+    })
+
+    formElement.addEventListener('submit', () => {
+      handleFormSubmitButton(inputSelectorFirst, inputSelectorSecond, submitButtonSelector);
+    })
   })
-
-  // inputSelectorFirst.addEventListener('input', () => handleFormInput(inputSelectorFirst, errorClassFirst));
-
-  // inputSelectorSecond.addEventListener('input', () => handleFormInput(inputSelectorSecond, errorClassSecond));
 }
 
-function handleFormInputs(evt, inputFirst, inputSecond, errorFirst, errorSecond) {
+document.addEventListener('DOMContentLoaded', () => {
+  enableValidation({
+    formSelector: '.popup__form',
+    inputSelector: '.popup__text',
+    submitButtonSelector: '.popup__submit-button',
+    inactiveButtonClass: '.popup__submit-button_disabled',
+    inputErrorClass: 'popup__text_wrong',
+    errorClass: '.popup__error'
+  });
+})
+
+function handleFormInputs(evt, inputFirst, inputSecond, errorFirst, errorSecond, submitButtonSelector, inputErrorClass) {
   const target = evt.target;
 
   if(target === inputFirst) {
-    handleFormInput(target, errorFirst)
+    handleFormInput(target, errorFirst, submitButtonSelector, inputErrorClass)
   }
   if(target === inputSecond) {
-    handleFormInput(target, errorSecond)
+    handleFormInput(target, errorSecond, submitButtonSelector, inputErrorClass)
   }
 }
 
-function handleErrorMessage(inputFirst, inputSecond, submitButton) {
-  if(inputFirst.validity.valid && inputSecond.validity.valid) {
-    submitButton.classList.remove('popup__submit-button_disabled')
+function handleFormSubmitButton(inputFirst, inputSecond, submitButton) {
+  if((inputFirst.validity.valid && inputSecond.validity.valid) && (inputFirst.value !== '' && inputSecond.value !== '')) {
+    submitButton.classList.remove('popup__submit-button_disabled');
+    submitButton.disabled = false;
   } else {
-    submitButton.classList.add('popup__submit-button_disabled')
+    submitButton.classList.add('popup__submit-button_disabled');
+    submitButton.disabled = true;
   }
 }
