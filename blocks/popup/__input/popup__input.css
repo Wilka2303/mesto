@@ -1,8 +1,16 @@
 .popup__input{
-  margin-bottom: 40px;
+  box-sizing: border-box;
+  max-height: 66px;
+  padding-bottom: 40px;
 }
 
 
 .popup__input:last-of-type{
-  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+@media screen and (max-width: 768px){
+  .popup__input{
+    max-height: 78px;
+  }
 }
