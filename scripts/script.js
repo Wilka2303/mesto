@@ -78,7 +78,6 @@ buttonCloseImage.addEventListener('click', function(){
 function addEventListeners(el, objectCard){
   el.querySelector('.places__trash').addEventListener('click', handleCardDelete);
   el.querySelector('.places__button').addEventListener('click', handleCardLike);
-  // Единственное как понимаю можно было бы вызвать функцию с использованием bind для объекта функции CreateCard, если есть какие то другие варианты буду благодарен если опишите, на текущий момент вернул все как было в версии можно лучше
   el.querySelector('.places__image').addEventListener('click', () => handleOpenBigImage(objectCard));
 }
 
