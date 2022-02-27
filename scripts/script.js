@@ -3,8 +3,8 @@ const buttonEditOpener = document.querySelector('.profile__edit-button');
 const buttonAddOpener = document.querySelector('.profile__add-button');
 const popupEditProfile = document.querySelector('.popup_type_edit');
 const popupAddCard = document.querySelector('.popup_type_add'); // Кнопка добавления
-const nameInput = popupEditProfile.querySelector('#name'); //Имя профиля в форме
-const jobInput = popupEditProfile.querySelector('#job'); //Описание профиля  в форме
+const nameInput = popupEditProfile.querySelector('#name-input'); //Имя профиля в форме
+const jobInput = popupEditProfile.querySelector('#job-input'); //Описание профиля  в форме
 const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__describe'); // Описание профиля в разметке
 const imageBig = document.querySelector ('#popup_image');
@@ -121,10 +121,6 @@ function handleOpenBigImage(objectCard) {
   if (typeof objectCard !== 'undefined'){
   const cardLink = objectCard.link;
   const cardName = objectCard.name;
-
-  const image = document.querySelector('.popup__image')
-  const imageTitle = document.querySelector('.popup__image-title')
-
   image.src = cardLink;
   imageTitle.textContent = cardName;
   image.alt = cardName;
