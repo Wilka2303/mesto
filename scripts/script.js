@@ -156,7 +156,6 @@ function handleCardLike (evt){
 popupEditProfile.addEventListener('submit', handleCardSubmit);
 popupAddCard.addEventListener('submit', handleCardFormSubmit );
 
-
 // Add to git
 
 
