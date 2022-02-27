@@ -3,13 +3,8 @@ const buttonEditOpener = document.querySelector('.profile__edit-button');
 const buttonAddOpener = document.querySelector('.profile__add-button');
 const popupEditProfile = document.querySelector('.popup_type_edit');
 const popupAddCard = document.querySelector('.popup_type_add'); // Кнопка добавления
-<<<<<<< HEAD
 const nameInput = popupEditProfile.querySelector('#popup__profile'); //Имя профиля в форме
 const jobInput = popupEditProfile.querySelector('#popup__job'); //Описание профиля  в форме
-=======
-const nameInput = popupEditProfile.querySelector('#name-input'); //Имя профиля в форме
-const jobInput = popupEditProfile.querySelector('#job-input'); //Описание профиля  в форме
->>>>>>> f0659cdae8f18068ea2b10c6b9b55706fb163146
 const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__describe'); // Описание профиля в разметке
 const imageBig = document.querySelector ('#popup_image');
@@ -126,6 +121,7 @@ function handleOpenBigImage(objectCard) {
   if (typeof objectCard !== 'undefined'){
   const cardLink = objectCard.link;
   const cardName = objectCard.name;
+
   image.src = cardLink;
   imageTitle.textContent = cardName;
   image.alt = cardName;
@@ -160,10 +156,6 @@ function handleCardLike (evt){
 popupEditProfile.addEventListener('submit', handleCardSubmit);
 popupAddCard.addEventListener('submit', handleCardFormSubmit );
 
-<<<<<<< HEAD
-=======
-
->>>>>>> f0659cdae8f18068ea2b10c6b9b55706fb163146
 // Add to git
 
 
