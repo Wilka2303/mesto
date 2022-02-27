@@ -121,10 +121,6 @@ function handleOpenBigImage(objectCard) {
   if (typeof objectCard !== 'undefined'){
   const cardLink = objectCard.link;
   const cardName = objectCard.name;
-
-  const image = document.querySelector('.popup__image')
-  const imageTitle = document.querySelector('.popup__image-title')
-
   image.src = cardLink;
   imageTitle.textContent = cardName;
   image.alt = cardName;
